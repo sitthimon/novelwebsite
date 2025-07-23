@@ -67,4 +67,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'bluesitthimon-copy'
+          slot-name: 'production'
           package: ./my-app
