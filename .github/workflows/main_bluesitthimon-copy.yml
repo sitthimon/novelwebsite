@@ -27,7 +27,7 @@ jobs:
         working-directory: ./my-app
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./
+        run: zip -r release.zip .
         working-directory: ./my-app
 
       - name: Upload artifact for deployment job
@@ -50,7 +50,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip release.zip -d my-app
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -63,5 +63,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'bluesitthimon-copy'
-          slot-name: 'Production'
-          package: .
+          package: ./my-app
