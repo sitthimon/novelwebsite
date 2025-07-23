@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/2899eaa4-c375-4e88-9307-4fbcc3e3f01d/resourceGroups/Sitthimon/providers/Microsoft.Web/sites/bluesitthimon-copy",
+    "appService.deploySubpath": "."
+}
