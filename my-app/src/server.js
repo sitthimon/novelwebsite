@@ -8,6 +8,15 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://bluesitthimon-copy-c5ebfthsdtahapef.southeastasia-01.azurewebsites.net'], // หรือใช้ '*' ชั่วคราว
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // ถ้ามีการใช้ cookie หรือ token
+};
+
+app.use(cors(corsOptions));
+
 // Debug middleware
 app.use((req, res, next) => {
   console.log('📥 Incoming request:', req.method, req.url);
