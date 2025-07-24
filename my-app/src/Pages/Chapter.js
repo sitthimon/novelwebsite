@@ -3,8 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { NovelContext } from "../NovelContext";
 import novelsData from '../novelsData';
 
-// Base path for Azure blob storage text files
-const AZURE_TEXT_BASE_URL = 'https://blueservice2004.blob.core.windows.net/longphrai/text/';
 
 export default function Chapter() {
     const { novelId, chapterId } = useParams();
