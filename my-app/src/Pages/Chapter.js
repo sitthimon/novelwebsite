@@ -23,20 +23,20 @@ export default function Chapter() {
         try {
             console.log(`🔄 Fetching novel ${novelId} from API...`);
             const response = await fetch(`http://localhost:4000/api/novels/${novelId}`);
-            
+
             if (response.ok) {
                 const novelData = await response.json();
                 console.log(`✅ API returned novel:`, novelData.title, 'with', novelData.chapters?.length || 0, 'chapters');
-                
+
                 // ใช้ข้อมูลจาก API เป็นหลัก
                 const novelWithFallbackCover = {
                     ...novelData,
                     coverUrl: novelData.coverUrl || fallbackNovel?.coverUrl || fallbackNovel?.img,
                     isFromAPI: true
                 };
-                
+
                 setNovel(novelWithFallbackCover);
-                
+
                 // หาตอนที่ต้องการ
                 const foundChapter = novelData.chapters.find(ch => ch.id.toString() === chapterId.toString());
                 if (foundChapter) {
@@ -45,7 +45,7 @@ export default function Chapter() {
                 } else {
                     console.warn(`⚠️ Chapter ${chapterId} not found in API data`);
                 }
-                
+
                 return novelWithFallbackCover;
             } else if (response.status === 404) {
                 console.warn(`⚠️ Novel ${novelId} not found in API, using fallback`);
@@ -55,7 +55,7 @@ export default function Chapter() {
         } catch (error) {
             console.error('❌ Error fetching novel from API:', error);
         }
-        
+
         // ใช้ fallback data หาก API ล้มเหลว
         if (fallbackNovel) {
             console.log('📋 Using fallback data for novel:', fallbackNovel.title);
@@ -63,16 +63,16 @@ export default function Chapter() {
                 ...fallbackNovel,
                 isFromAPI: false
             });
-            
+
             const fallbackChapter = fallbackNovel.chapters.find(ch => ch.id.toString() === chapterId.toString());
             if (fallbackChapter) {
                 setChapter(fallbackChapter);
                 console.log(`📋 Using fallback chapter:`, fallbackChapter.title);
             }
-            
+
             return fallbackNovel;
         }
-        
+
         return null;
     };
 
@@ -81,21 +81,21 @@ export default function Chapter() {
         const loadNovel = async () => {
             setNovelLoading(true);
             const novelData = await fetchNovelFromAPI();
-            
+
             if (!novelData) {
                 console.error('❌ No novel data available');
             }
-            
+
             setNovelLoading(false);
         };
-        
+
         loadNovel();
     }, [novelId, chapterId]);
 
     useEffect(() => {
         const loadChapterContent = async () => {
             if (!chapter) return;
-            
+
             setLoading(true);
             setError(null);
 
@@ -116,10 +116,7 @@ export default function Chapter() {
                     mode: 'cors',
                     cache: 'no-cache',
                     headers: {
-                        'Accept': 'text/plain, text/html, */*',
-                        'Accept-Encoding': 'gzip, deflate, br',
-                        'Accept-Language': 'th,en-US;q=0.9,en;q=0.8',
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                        'Accept': 'text/plain'
                     }
                 });
 
