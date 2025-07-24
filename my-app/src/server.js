@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Base path for Azure blob storage text files
 const AZURE_TEXT_BASE_URL = 'https://blueservice2004.blob.core.windows.net/longphrai/text/';
-
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://bluesitthimon-copy-c5ebfthsdtahapef.southeastasia-01.azurewebsites.net'], // หรือใช้ '*' ชั่วคราว
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
